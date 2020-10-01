@@ -34,10 +34,10 @@ export function Films() {
     }
   };
 
-  // useEffect(() => {
-  //   if( isFocused )
-  //     startGetFilms();
-  // }, [ isFocused ]);
+  useEffect(() => {
+    if( isFocused )
+      startGetFilms();
+  }, [ isFocused ]);
 
   return (
     <KeyboardAvoidingView style={ Styles.container }>
@@ -46,9 +46,12 @@ export function Films() {
           films.length !== 0
             ? films.map( film =>
               <CardFilms
-                key={ film.episode_id }
-                title={ film.title }
-                ep={ film.episode_id }
+                key={ film?.episode_id }
+                title={ film?.title }
+                ep={ film?.episode_id }
+                release={ film?.release_date }
+                director={ film?.director }
+                producer={ film?.producer }
               />
             )
             : <View style={ Styles.emptyView }>
