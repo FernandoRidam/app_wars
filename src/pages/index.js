@@ -1,2 +1,3 @@
 export * from './Films';
-export * from './Details';
+export * from './FilmDetails';
+export * from './CharacterDetails';

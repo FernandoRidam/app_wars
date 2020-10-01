@@ -9,13 +9,3 @@ export async function getFilms() {
     return { success: false, message: 'Falha ao se comunicar com o servidor!' };
   }
 };
-
-export async function getFilm( id ) {
-  try {
-    const { data } = await api.get(`/films/${ id }`);
-
-    return { success: true, message: '', film: data };
-  } catch {
-    return { success: false, message: 'Falha ao se comunicar com o servidor!' };
-  }
-};

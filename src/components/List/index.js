@@ -17,7 +17,7 @@ import {
 
 import Styles from './styles';
 
-export function List({ title, list, type }) {
+export function List({ title, list, type, handleNavigation, route }) {
   const [ loading, setLoading ] = useState( false );
 
   const [ characters, setCharacters ] = useState([]);
@@ -58,13 +58,14 @@ export function List({ title, list, type }) {
           ? <FlatList
               contentContainerStyle={ Styles.flatList }
               data={ characters }
-              keyExtractor={ item => item.name }
+              keyExtractor={ item => item.name || item.title }
               showsHorizontalScrollIndicator={ false }
               horizontal
               renderItem={({ item }) => {
                 return (
                   <Card
-                    text={ item?.name }
+                    text={ item?.name || item?.title }
+                    openDetails={() => handleNavigation( route, item )}
                   />
                 );
               }}

@@ -47,14 +47,6 @@ const Styles = StyleSheet.create({
     borderBottomWidth: .4,
     borderBottomColor: '#D9D9D9',
   },
-
-  charactersView: {
-    width: '100%',
-  },
-
-  subTitle: {
-    fontSize: 20,
-  },
 });
 
 export default Styles;

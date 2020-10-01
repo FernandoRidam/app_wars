@@ -23,7 +23,7 @@ export function Films({ navigation }) {
   const [ films, setFilms ] = useState([]);
 
   function handleNavigatin( id ) {
-    navigation.navigate('Details', { id });
+    navigation.navigate('FilmDetails', { id, type: 'films'});
   };
 
   async function startGetFilms() {

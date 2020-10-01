@@ -7,12 +7,12 @@ import {
 
 import Styles from './styles';
 
-export function Card({ text, openCharactersDetails }) {
+export function Card({ text, openDetails }) {
   return (
     <TouchableOpacity
       activeOpacity={ .6 }
       style={ Styles.card }
-      onPress={ openCharactersDetails }
+      onPress={ openDetails }
     >
       <Text style={ Styles.text }>{ text }</Text>
     </TouchableOpacity>

@@ -17,7 +17,8 @@ import logo from './assets/icon.png';
 
 import {
   Films,
-  Details,
+  FilmDetails,
+  CharacterDetails,
 } from './pages';
 
 const Stack = createStackNavigator();
@@ -61,8 +62,15 @@ export default function Routes() {
 
         <Stack.Screen
           options={ headerOptions }
-          name="Details"
-          component={ Details }
+          name="FilmDetails"
+          component={ FilmDetails }
+
+        />
+
+        <Stack.Screen
+          options={ headerOptions }
+          name="CharacterDetails"
+          component={ CharacterDetails }
 
         />
       </Stack.Navigator>
