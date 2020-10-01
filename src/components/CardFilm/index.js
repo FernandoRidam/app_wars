@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 
 import {
   Image,
@@ -13,11 +13,12 @@ import logo from '../../assets/icon.png';
 
 import Styles from './styles';
 
-export function CardFilms({ title, ep, release, producer, director }) {
+export function CardFilms({ title, ep, release, producer, director, openDetails }) {
   return (
     <TouchableOpacity
       activeOpacity={ .6 }
       style={ Styles.card }
+      onPress={ openDetails }
     >
       <Image source={ logo } style={ Styles.backgroundImage }/>
 

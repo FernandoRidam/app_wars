@@ -5,10 +5,7 @@ import {
   ScrollView,
   Text,
   View,
-  ActivityIndicator,
 } from 'react-native';
-
-import { useIsFocused } from '@react-navigation/native';
 
 import {
   getFilms,
@@ -20,12 +17,14 @@ import {
 
 import Styles from './styles';
 
-export function Films() {
-  const isFocused = useIsFocused();
-
+export function Films({ navigation }) {
   const [ loading, setLoading ] = useState( false );
 
   const [ films, setFilms ] = useState([]);
+
+  function handleNavigatin( id ) {
+    navigation.navigate('Details', { id });
+  };
 
   async function startGetFilms() {
     setLoading( true );
@@ -35,16 +34,24 @@ export function Films() {
     if( success ) {
       setFilms( films );
     } else {
-      // alertar erro...
+      showMessage({
+        message: message,
+        type: 'danger',
+        backgroundColor: 'rgba(217, 217, 217, .6)',
+        color: '#FFF',
+        icon: 'danger',
+        titleStyle: {
+          fontSize: 16,
+        }
+      });
     }
 
     setLoading( false );
   };
 
   useEffect(() => {
-    if( isFocused )
-      startGetFilms();
-  }, [ isFocused ]);
+    startGetFilms();
+  }, []);
 
   return (
     <KeyboardAvoidingView style={ Styles.container }>
@@ -53,7 +60,7 @@ export function Films() {
           ? films.length !== 0
               ? <ScrollView contentContainerStyle={ Styles.scrollView }>
                   {
-                    films.map( film =>
+                    films.map(( film, index ) =>
                       <CardFilms
                         key={ film?.episode_id }
                         title={ film?.title }
@@ -61,6 +68,7 @@ export function Films() {
                         release={ film?.release_date }
                         director={ film?.director }
                         producer={ film?.producer }
+                        openDetails={() => handleNavigatin( film.url.substr( -2, 1 ))}
                       />
                     )
                   }
@@ -68,9 +76,7 @@ export function Films() {
               : <View style={ Styles.emptyView }>
                   <Text style={ Styles.empty }>Empty...</Text>
                 </View>
-          : <View style={ Styles.emptyView }>
-              <ActivityIndicator size={ 80 } color="#D9D9D9" />
-            </View>
+          : <Loading />
       }
     </KeyboardAvoidingView>
   );
