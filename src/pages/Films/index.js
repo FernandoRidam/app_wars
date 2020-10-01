@@ -5,6 +5,7 @@ import {
   ScrollView,
   Text,
   View,
+  ActivityIndicator,
 } from 'react-native';
 
 import { useIsFocused } from '@react-navigation/native';
@@ -14,7 +15,7 @@ import {
 } from '../../services';
 
 import {
-  CardFilms,
+  CardFilms, Loading,
 } from '../../components';
 
 import Styles from './styles';
@@ -22,9 +23,13 @@ import Styles from './styles';
 export function Films() {
   const isFocused = useIsFocused();
 
+  const [ loading, setLoading ] = useState( false );
+
   const [ films, setFilms ] = useState([]);
 
   async function startGetFilms() {
+    setLoading( true );
+
     const { success, message, films } = await getFilms();
 
     if( success ) {
@@ -32,6 +37,8 @@ export function Films() {
     } else {
       // alertar erro...
     }
+
+    setLoading( false );
   };
 
   useEffect(() => {
@@ -41,24 +48,30 @@ export function Films() {
 
   return (
     <KeyboardAvoidingView style={ Styles.container }>
-      <ScrollView contentContainerStyle={ Styles.scrollView }>
-        {
-          films.length !== 0
-            ? films.map( film =>
-              <CardFilms
-                key={ film?.episode_id }
-                title={ film?.title }
-                ep={ film?.episode_id }
-                release={ film?.release_date }
-                director={ film?.director }
-                producer={ film?.producer }
-              />
-            )
-            : <View style={ Styles.emptyView }>
-                <Text style={ Styles.empty }>Empty...</Text>
-              </View>
-        }
-      </ScrollView>
+      {
+        !loading
+          ? films.length !== 0
+              ? <ScrollView contentContainerStyle={ Styles.scrollView }>
+                  {
+                    films.map( film =>
+                      <CardFilms
+                        key={ film?.episode_id }
+                        title={ film?.title }
+                        ep={ film?.episode_id }
+                        release={ film?.release_date }
+                        director={ film?.director }
+                        producer={ film?.producer }
+                      />
+                    )
+                  }
+                </ScrollView>
+              : <View style={ Styles.emptyView }>
+                  <Text style={ Styles.empty }>Empty...</Text>
+                </View>
+          : <View style={ Styles.emptyView }>
+              <ActivityIndicator size={ 80 } color="#D9D9D9" />
+            </View>
+      }
     </KeyboardAvoidingView>
   );
 };

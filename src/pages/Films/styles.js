@@ -15,10 +15,9 @@ const Styles = StyleSheet.create({
   },
 
   emptyView: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
-    marginTop: 100,
   },
 
   empty: {

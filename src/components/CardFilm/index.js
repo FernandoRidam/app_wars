@@ -36,7 +36,7 @@ export function CardFilms({ title, ep, release, producer, director }) {
       </View>
 
       <View style={ Styles.releaseView }>
-        <Text style={ Styles.release }>Release date</Text>
+        <Text style={ Styles.release }>Release Date</Text>
 
         <Text style={ Styles.release }>{ format( new Date( release ), 'MMMM dd, yyyy')}</Text>
       </View>
