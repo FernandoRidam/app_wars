@@ -26,7 +26,7 @@ import {
 import Styles from './styles';
 
 export function FilmDetails({ navigation, route }) {
-  const { id, type } = route.params;
+  const { id, type, item } = route.params;
 
   const isFocused = useIsFocused();
 
@@ -66,9 +66,13 @@ export function FilmDetails({ navigation, route }) {
   };
 
   useEffect(() => {
+    setFilm( item );
+  }, [ item ]);
+
+  useEffect(() => {
     if( isFocused )
       startGetDetails();
-  }, [ id, isFocused ]);
+  }, [ id ]);
 
   return (
     <KeyboardAvoidingView style={ Styles.container }>
